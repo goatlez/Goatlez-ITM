@@ -4,6 +4,7 @@ This assignment will develop your proficiency with Python's control flows.
 '''
 
 def shift_letter(letter, shift):
+
     '''Shift Letter.
 
     Shift a letter right by the given number.
@@ -34,7 +35,24 @@ def shift_letter(letter, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+
+    letter_catalogue = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+    if letter == " ":
+        
+        return " "
+
+    else:
+
+        index = letter_catalogue.index(letter)
+
+        new_index = index + shift
+
+        while new_index > 25:
+            new_index = new_index - 26
+                
+        return letter_catalogue[new_index]
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher.
@@ -55,7 +73,27 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    letter_catalogue = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+    new_word = ""
+
+    for letter in message:
+
+    
+        if letter == " ":
+            
+            new_word = new_word + " "
+    
+        else:
+    
+            index = letter_catalogue.index(letter)
+    
+            new_index = (index + shift) % 26
+    
+            new_word = new_word + letter_catalogue[new_index]
+            
+    return new_word
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter.
@@ -84,7 +122,49 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    letter_catalogue = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+    letter_dictionary = {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 3,
+        "E": 4,
+        "F": 5,
+        "G": 6,
+        "H": 7,
+        "I": 8,
+        "J": 9,
+        "K": 10,
+        "L": 11,
+        "M": 12,
+        "N": 13,
+        "O": 14,
+        "P": 15,
+        "Q": 16,
+        "R": 17,
+        "S": 18,
+        "T": 19,
+        "U": 20,
+        "V": 21,
+        "W": 22,
+        "X": 23,
+        "Y": 24,
+        "Z": 25
+    }
+
+    if letter == " ":
+            
+        return " "
+    
+    else:
+    
+        index = letter_catalogue.index(letter)
+    
+        new_index = (index + letter_dictionary[letter_shift]) % 26
+                    
+        return letter_catalogue[new_index]
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher.
@@ -116,7 +196,64 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+    letter_catalogue = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+    letter_dictionary = {
+        "A": 0,
+        "B": 1,
+        "C": 2,
+        "D": 3,
+        "E": 4,
+        "F": 5,
+        "G": 6,
+        "H": 7,
+        "I": 8,
+        "J": 9,
+        "K": 10,
+        "L": 11,
+        "M": 12,
+        "N": 13,
+        "O": 14,
+        "P": 15,
+        "Q": 16,
+        "R": 17,
+        "S": 18,
+        "T": 19,
+        "U": 20,
+        "V": 21,
+        "W": 22,
+        "X": 23,
+        "Y": 24,
+        "Z": 25
+    }
+
+    key_index = 0
+    key_word = ""
+    
+    for message_letter in message:
+
+        if message_letter == " ":
+
+            key_word = key_word + " "
+
+            key_index = key_index + 1
+
+        else:
+        
+            key_letter = key[key_index % len(key)]
+        
+            key_letter_index = letter_dictionary[key_letter]
+        
+            ciphered_index = (letter_catalogue.index(message_letter) + key_letter_index) % 26
+        
+            ciphered_letter = letter_catalogue[ciphered_index]
+        
+            key_word = key_word + str(ciphered_letter)
+            
+            key_index = key_index + 1
+    
+    return key_word
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -169,7 +306,28 @@ def scytale_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+    length = len(message)
+
+    if length % shift != 0:
+        
+        message = message + ("_" * (shift - length % shift))
+
+    ciphered_message = ""
+    
+    index = 0
+
+    for letter in message:
+    
+        ciphered_index = (index // shift) + (len(message) // shift) * (index % shift)
+
+        ciphered_letter = message[ciphered_index]
+    
+        ciphered_message = ciphered_message + str(ciphered_letter)
+
+        index = index + 1
+    
+    return ciphered_message
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
@@ -197,4 +355,30 @@ def scytale_decipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+
+    length = len(message)
+
+    decoded_letters = [" "] * length 
+    
+    '''because lists are mutable'''
+
+    for letter_index in range(length):
+
+        original_index = (letter_index // shift) + (length // shift) * (letter_index % shift)
+        
+        decoded_letters[original_index] = message[letter_index]
+
+    decoded_message = "".join(decoded_letters)
+
+    return decoded_message
+
+'''
+
+problem: how to arrange letters chronologically
+
+- individually find the index of each letter. arrange based on index once everything is solved for
+
+'''
+
+
